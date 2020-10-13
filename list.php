@@ -10,7 +10,8 @@
 </head>
 
 <body class="bg-dark">
-    <?php include("inc/nav.inc.php"); ?>
+    <?php include("inc/nav.inc.php");
+    include("inc/login.inc.php"); ?>
     <div class="flex-container">
         <div class="flex-item-1">
             <ul>
@@ -104,13 +105,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">ID</th>
-                        <td>FIRSTNAME</td>
-                        <td>LASTNAME</td>
-                        <td>...</td>
-                        <!-- Add all of the citizen status values -->
-                    </tr>
+                    <?php
+                    $result = $con->query("SELECT * FROM citizen");
+
+                    while ($entry = $result->fetch_assoc()) {
+                    ?>
+                        <tr>
+                            <td><?php echo $entry['ssn']; ?></td>
+                            <td><?php echo $entry['addressID']; ?></td>
+                            <td><?php echo $entry['first_name']; ?></td>
+                            <td><?php echo $entry['last_name']; ?></td>
+                            <td><?php echo $entry['age']; ?></td>
+                            <td><?php echo $entry['gender'];?></td>
+                            <td><?php echo $entry['wallet'];?></td>
+                            <td><?php echo $entry['healthbar'];?></td>
+                            <td><?php echo $entry['event'];?></td>
+                            <td><?php echo $entry['eventTime'];?></td>
+                            <td><?php echo $entry['happiness'];?></td>
+                            <td><?php echo $entry['love'];?></td>
+                            <td>fear</td>
+                            <td>sadness</td>
+                            <td>anger</td>
+                            <td>thirst</td>
+                            <td>hunger</td>
+                            <td>toilet</td>
+                            <td>hygiene</td>
+                            <td>employername</td>
+                        </tr>
+                    <?php
+                    }
+                    $con->close();
+                    ?>
                     <!-- tablerows will be added with a loop -->
                 </tbody>
             </table>
