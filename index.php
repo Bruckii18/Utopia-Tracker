@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <h1>HElloo0 </h1>
     <?php include("inc/nav.inc.php"); ?>
 
     <?php include("inc/login.inc.php");

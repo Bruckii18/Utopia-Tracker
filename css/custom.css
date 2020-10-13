@@ -1,6 +1,118 @@
+<<<<<<< HEAD
 nav a {
     font-size: 1.3rem;
 }
 nav a.navbar-brand {
     font-size: 1.7rem;
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.flex-container {
+    display: flex;
+}
+
+.flex-item-1 {
+    flex: 1;
+}
+
+.flex-item-4 {
+    flex: 4;
+>>>>>>> 6c1aaecf5ec87e7c47c5ee44af65127e58bca067
 }
