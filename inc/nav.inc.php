@@ -8,10 +8,10 @@
             <ul class="navbar-nav">
 
                 <li class="col nav-item">
-                    <a class="nav-link" href="#">Übersicht</a>
+                    <a class="nav-link" href="index.php">Übersicht</a>
                 </li>
                 <li class="col nav-item">
-                    <a class="nav-link" href="#">Liste</a>
+                    <a class="nav-link" href="list.php">Liste</a>
                 </li>
             </ul>
         </div>
