@@ -157,16 +157,15 @@ nav a.navbar-brand {
     display: none;
 }
 
-
-
-
 .flex-container {
+    margin: auto;
+    margin-top: 3rem;
+    width: 90%;
     display: flex;
 }
 
 .flex-item-1 {
     flex: 1;
-   margin: auto;
 }
 
 .flex-item-4 {

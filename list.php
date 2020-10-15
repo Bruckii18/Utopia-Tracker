@@ -14,9 +14,9 @@
     include("inc/login.inc.php"); ?>
     <div class="flex-container">
         <div class="flex-item-1">
-            <ul>
+            <ul class="list-unstyled">
                 <p>FILTERS</p>
-                <div class="dropdown">
+                <div class="dropdown mb-1">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Dropdown button
                     </button>
@@ -26,7 +26,7 @@
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </div>
-                <div class="dropdown">
+                <div class="dropdown mb-1">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Dropdown button
                     </button>
@@ -179,29 +179,32 @@
                         <th class="checkSsn">SSN</th>
                         <th class="checkFirstname">Vorname</th>
                         <th class="checkLastname">Nachname</th>
-                        <th class="checkAddress">Adresse</th>
-                        <th class="checkAge">Alter</th>
-                        <th class="checkGender">Geschlecht</th>
-                        <th class="checkWallet">Bargeld</th>
-                        <th class="checkHealthbar">Gesundheit</th>
-                        <th class="checkEvent">Aktuelles Event</th>
-                        <th class="checkEventTime">Eventzeit</th>
-                        <th class="checkHappiness">Fröhlichkeit</th>
-                        <th class="checkLove">Liebe</th>
-                        <th class="checkFear">Angst</th>
-                        <th class="checkSadness">Traurigkeit</th>
-                        <th class="checkAnger">Wut</th>
-                        <th class="checkThirst">Durst</th>
-                        <th class="checkHunger">Hunger</th>
-                        <th class="checkToilet">Harndrang</th>
-                        <th class="checkHygiene">Hygiene</th>
-                        <th class="checkEmployername">Arbeitgeber</th>
+                        <th class="checkAddress hideElement">Adresse</th>
+                        <th class="checkAge hideElement">Alter</th>
+                        <th class="checkGender hideElement">Geschlecht</th>
+                        <th class="checkWallet hideElement">Bargeld</th>
+                        <th class="checkHealthbar hideElement">Gesundheit</th>
+                        <th class="checkEvent hideElement">Aktuelles Event</th>
+                        <th class="checkEventTime hideElement">Eventzeit</th>
+                        <th class="checkHappiness hideElement">Fröhlichkeit</th>
+                        <th class="checkLove hideElement">Liebe</th>
+                        <th class="checkFear hideElement">Angst</th>
+                        <th class="checkSadness hideElement">Traurigkeit</th>
+                        <th class="checkAnger hideElement">Wut</th>
+                        <th class="checkThirst hideElement">Durst</th>
+                        <th class="checkHunger hideElement">Hunger</th>
+                        <th class="checkToilet hideElement">Harndrang</th>
+                        <th class="checkHygiene hideElement">Hygiene</th>
+                        <th class="checkEmployername hideElement">Arbeitgeber</th>
                         <!-- Add all of the citizen status values -->
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $result = $con->query("SELECT * FROM citizen");
+                    $result = $con->query("SELECT citizen.*, address.*
+                    FROM citizen
+                    JOIN address
+                    ON citizen.addressID = address.addressID;");
 
                     while ($entry = $result->fetch_assoc()) {
                     ?>
@@ -209,27 +212,34 @@
                             <td class="checkSsn"><?php echo $entry['ssn']; ?></td>
                             <td class="checkFirstname"><?php echo $entry['first_name']; ?></td>
                             <td class="checkLastname"><?php echo $entry['last_name']; ?></td>
-                            <td class="checkAddress"><?php echo $entry['addressID']; ?></td>
-                            <td class="checkAge"><?php echo $entry['age']; ?></td>
-                            <td class="checkGender"><?php echo $entry['gender']; ?></td>
-                            <td class="checkWallet"><?php echo $entry['wallet']; ?></td>
-                            <td class="checkHealthbar"><?php echo $entry['healthbar']; ?></td>
-                            <td class="checkEvent"><?php echo $entry['event']; ?></td>
-                            <td class="checkEventTime"><?php echo $entry['eventTime']; ?></td>
-                            <td class="checkHappiness"><?php echo $entry['happiness']; ?></td>
-                            <td class="checkLove"><?php echo $entry['love']; ?></td>
-                            <td class="checkFear"><?php echo $entry['fear']; ?></td>
-                            <td class="checkSadness"><?php echo $entry['sadness']; ?></td>
-                            <td class="checkAnger"><?php echo $entry['anger']; ?></td>
-                            <td class="checkThirst"><?php echo $entry['thirst']; ?></td>
-                            <td class="checkHunger"><?php echo $entry['hunger']; ?></td>
-                            <td class="checkToilet"><?php echo $entry['toilet']; ?></td>
-                            <td class="checkHygiene"><?php echo $entry['hygiene']; ?></td>
-                            <td class="checkEmployername"><?php if (!isset($entry['employername'])) {
-                                                                echo ("Arbeitslos");
-                                                            } else {
-                                                                echo $entry['employername'];
-                                                            } ?></td>
+                            <td class="checkAddress hideElement">
+                            <?php 
+                            $adressString = $entry['district'] . "-" . $entry['street'] . " " . $entry['streetNumber'];
+                            if(isset($entry['doorNumber'])) {
+                                $adressString .= "/" . $entry['doorNumber'];
+                            }
+                            echo $adressString; 
+                            ?></td>
+                            <td class="checkAge hideElement"><?php echo $entry['age']; ?></td>
+                            <td class="checkGender hideElement"><?php echo $entry['gender']; ?></td>
+                            <td class="checkWallet hideElement"><?php echo $entry['wallet']; ?></td>
+                            <td class="checkHealthbar hideElement"><?php echo $entry['healthbar']; ?></td>
+                            <td class="checkEvent hideElement"><?php echo $entry['event']; ?></td>
+                            <td class="checkEventTime hideElement"><?php echo $entry['eventTime']; ?></td>
+                            <td class="checkHappiness hideElement"><?php echo $entry['happiness']; ?></td>
+                            <td class="checkLove hideElement"><?php echo $entry['love']; ?></td>
+                            <td class="checkFear hideElement"><?php echo $entry['fear']; ?></td>
+                            <td class="checkSadness hideElement"><?php echo $entry['sadness']; ?></td>
+                            <td class="checkAnger hideElement"><?php echo $entry['anger']; ?></td>
+                            <td class="checkThirst hideElement"><?php echo $entry['thirst']; ?></td>
+                            <td class="checkHunger hideElement"><?php echo $entry['hunger']; ?></td>
+                            <td class="checkToilet hideElement"><?php echo $entry['toilet']; ?></td>
+                            <td class="checkHygiene hideElement"><?php echo $entry['hygiene']; ?></td>
+                            <td class="checkEmployername hideElement"><?php if (!isset($entry['employerName'])) {
+                                                                            echo ("Arbeitslos");
+                                                                        } else {
+                                                                            echo $entry['employerName'];
+                                                                        } ?></td>
                         </tr>
                     <?php
                     }
