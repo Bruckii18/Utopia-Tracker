@@ -116,13 +116,13 @@
                             <td><?php echo $entry['first_name']; ?></td>
                             <td><?php echo $entry['last_name']; ?></td>
                             <td><?php echo $entry['age']; ?></td>
-                            <td><?php echo $entry['gender'];?></td>
-                            <td><?php echo $entry['wallet'];?></td>
-                            <td><?php echo $entry['healthbar'];?></td>
-                            <td><?php echo $entry['event'];?></td>
-                            <td><?php echo $entry['eventTime'];?></td>
-                            <td><?php echo $entry['happiness'];?></td>
-                            <td><?php echo $entry['love'];?></td>
+                            <td><?php echo $entry['gender']; ?></td>
+                            <td><?php echo $entry['wallet']; ?></td>
+                            <td><?php echo $entry['healthbar']; ?></td>
+                            <td><?php echo $entry['event']; ?></td>
+                            <td><?php echo $entry['eventTime']; ?></td>
+                            <td><?php echo $entry['happiness']; ?></td>
+                            <td><?php echo $entry['love']; ?></td>
                             <td>fear</td>
                             <td>sadness</td>
                             <td>anger</td>
@@ -141,7 +141,7 @@
             </table>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/5ad08af459.js" crossorigin="anonymous"></script>
