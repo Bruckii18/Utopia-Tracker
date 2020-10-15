@@ -17,33 +17,32 @@
             <ul class="list-unstyled">
                 <p>FILTERS</p>
                 <div class="dropdown mb-1">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown button
+                    <label for="districtFilter">Bezirk</label><br />
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="districtFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Alle
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-menu" aria-labelledby="districtFilter">
+                        <a class="dropdown-item district" data-id="0" href="#">Alle</a>
+                        <a class="dropdown-item district" data-id="1" href="#">1</a>
+                        <a class="dropdown-item district" data-id="2" href="#">2</a>
+                        <a class="dropdown-item district" data-id="3" href="#">3</a>
+                        <a class="dropdown-item district" data-id="4" href="#">4</a>
+                        <a class="dropdown-item district" data-id="5" href="#">5</a>
                     </div>
                 </div>
                 <div class="dropdown mb-1">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown button
+                    <label for="employeeFilter">Arbeitsplatz</label><br />
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="employeeFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Alle
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown button
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item employer" href="#" data-id="0">Alle</a>
+                        <?php
+                        $employer = $con->query("SELECT name FROM employer");
+                        while ($results = $employer->fetch_assoc()) {
+                        ?>
+                            <a class="dropdown-item employer" href="#" data-id="<?php echo $results['name'] ?>"><?php echo $results['name'] ?></a>
+                        <?php } ?>
                     </div>
                 </div>
             </ul>
@@ -212,14 +211,14 @@
                             <td class="checkSsn"><?php echo $entry['ssn']; ?></td>
                             <td class="checkFirstname"><?php echo $entry['first_name']; ?></td>
                             <td class="checkLastname"><?php echo $entry['last_name']; ?></td>
-                            <td class="checkAddress hideElement">
-                            <?php 
-                            $adressString = $entry['district'] . "-" . $entry['street'] . " " . $entry['streetNumber'];
-                            if(isset($entry['doorNumber'])) {
-                                $adressString .= "/" . $entry['doorNumber'];
-                            }
-                            echo $adressString; 
-                            ?></td>
+                            <td class="checkAddress hideElement" id="<?php echo $entry['district'] ?>">
+                                <?php
+                                $adressString = $entry['district'] . "-" . $entry['street'] . " " . $entry['streetNumber'];
+                                if (isset($entry['doorNumber'])) {
+                                    $adressString .= "/" . $entry['doorNumber'];
+                                }
+                                echo $adressString;
+                                ?></td>
                             <td class="checkAge hideElement"><?php echo $entry['age']; ?></td>
                             <td class="checkGender hideElement"><?php echo $entry['gender']; ?></td>
                             <td class="checkWallet hideElement"><?php echo $entry['wallet']; ?></td>
@@ -235,11 +234,11 @@
                             <td class="checkHunger hideElement"><?php echo $entry['hunger']; ?></td>
                             <td class="checkToilet hideElement"><?php echo $entry['toilet']; ?></td>
                             <td class="checkHygiene hideElement"><?php echo $entry['hygiene']; ?></td>
-                            <td class="checkEmployername hideElement"><?php if (!isset($entry['employerName'])) {
-                                                                            echo ("Arbeitslos");
-                                                                        } else {
-                                                                            echo $entry['employerName'];
-                                                                        } ?></td>
+                            <td class="checkEmployername hideElement" id="<?php echo $entry['employerName'] ?>"><?php if (!isset($entry['employerName'])) {
+                                                                                                                    echo ("Arbeitslos");
+                                                                                                                } else {
+                                                                                                                    echo $entry['employerName'];
+                                                                                                                } ?></td>
                         </tr>
                     <?php
                     }
@@ -255,6 +254,53 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/5ad08af459.js" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
+    <script>
+        $(document).ready(function() {
+            ///////////////// District Filter /////////////////////
+            $('.district').click(function() {
+                var districtID = $(this).data('id');
+                var addressList = document.getElementsByClassName("checkAddress");
+                let dropdownTitle = document.getElementById("districtFilter");
+
+                for (i = 0; i < addressList.length; i++) {
+                    if (districtID == 0) {
+                        addressList[i].parentElement.style.display = "table-row";
+                        dropdownTitle.innerHTML = "Alle";
+                    } else if (districtID != addressList[i].id) {
+                        addressList[i].parentElement.style.display = "none";
+                    } else {
+                        addressList[i].parentElement.style.display = "table-row";
+                    }
+                }
+                if (districtID != 0) {
+                    dropdownTitle.innerHTML = districtID;
+                }
+            });
+            ///////////////// District Filter ENDE /////////////////////
+
+            ///////////////// Employer Filter /////////////////////
+            $('.employer').click(function() {
+                var employername = $(this).data('id');
+                var employernameList = document.getElementsByClassName("checkEmployername");
+                let dropdownTitle = document.getElementById("employeeFilter");
+
+                for (i = 0; i < employernameList.length; i++) {
+                    if (employername == 0) {
+                        employernameList[i].parentElement.style.display = "table-row";
+                        dropdownTitle.innerHTML = "Alle";
+                    } else if (employername != employernameList[i].id) {
+                        employernameList[i].parentElement.style.display = "none";
+                    } else {
+                        employernameList[i].parentElement.style.display = "table-row";
+                    }
+                }
+                if (employername != 0) {
+                    dropdownTitle.innerHTML = employername;
+                }
+            });
+            ///////////////// Employer Filter ENDE /////////////////////
+        });
+    </script>
 </body>
 
 </html>
