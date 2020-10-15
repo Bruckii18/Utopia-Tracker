@@ -92,12 +92,9 @@ nav a.navbar-brand {
 
 
 
-
-
-
-
-
-
+.hideElement {
+    display: none;
+}
 
 
 
@@ -108,8 +105,13 @@ nav a.navbar-brand {
 
 .flex-item-1 {
     flex: 1;
+   margin: auto;
 }
 
 .flex-item-4 {
     flex: 4;
+}
+
+.overflow-scroll {
+    overflow: scroll;
 }
